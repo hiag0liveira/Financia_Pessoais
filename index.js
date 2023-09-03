@@ -89,6 +89,7 @@ async function saveTransaction(ev) {
         transactions.splice(indexToRemove, 1, transaction)
         document.querySelector(`#transaction-${id}`).remove()
         renderTransaction(transaction)
+        reload()
     } else {
         const response = await fetch('https://financas-db.vercel.app/transactions', {
             method: 'POST',
@@ -100,11 +101,11 @@ async function saveTransaction(ev) {
         const transaction = await response.json()
         transactions.push(transaction)
         renderTransaction(transaction)
+        reload()
     }
 
     ev.target.reset()
     updateBalance()
-    reload()
 }
 
 async function fetchTransactions() {
