@@ -50,7 +50,7 @@ function createDeleteTransactionButton(id) {
     deleteBtn.classList.add('delete-btn')
     deleteBtn.textContent = 'Excluir'
     deleteBtn.addEventListener('click', async () => {
-        await fetch(`http://localhost:3000/transactions/${id}`, { method: 'DELETE' })
+        await fetch(`https://financas-db.vercel.app/transactions/${id}`, { method: 'DELETE' })
         deleteBtn.parentElement.remove()
         const indexToRemove = transactions.findIndex((t) => t.id === id)
         transactions.splice(indexToRemove, 1)
@@ -77,7 +77,7 @@ async function saveTransaction(ev) {
     const amount = parseFloat(document.querySelector('#amount').value)
 
     if (id) {
-        const response = await fetch(`http://localhost:3000/transactions/${id}`, {
+        const response = await fetch(`https://financas-db.vercel.app/transactions/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ name, amount }),
             headers: {
@@ -90,7 +90,7 @@ async function saveTransaction(ev) {
         document.querySelector(`#transaction-${id}`).remove()
         renderTransaction(transaction)
     } else {
-        const response = await fetch('http://localhost:3000/transactions', {
+        const response = await fetch('https://financas-db.vercel.app/transactions', {
             method: 'POST',
             body: JSON.stringify({ name, amount }),
             headers: {
@@ -107,7 +107,7 @@ async function saveTransaction(ev) {
 }
 
 async function fetchTransactions() {
-    return await fetch('http://localhost:3000/transactions').then(res => res.json())
+    return await fetch('https://financas-db.vercel.app/transactions').then(res => res.json())
 }
 
 function updateBalance() {
