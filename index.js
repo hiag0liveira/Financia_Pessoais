@@ -104,7 +104,7 @@ async function saveTransaction(ev) {
 
     ev.target.reset()
     updateBalance()
-    location.reload()
+    reload()
 }
 
 async function fetchTransactions() {
