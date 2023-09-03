@@ -103,13 +103,11 @@ async function saveTransaction(ev) {
             renderTransaction(transaction)
         } catch (error) {
             console.log(error)
-            const transaction = await response.json()
-            transactions.push(transaction)
-            renderTransaction(transaction)
         }
     }
     ev.target.reset()
     updateBalance()
+    location.reload()
 }
 
 async function fetchTransactions() {
