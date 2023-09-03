@@ -90,18 +90,24 @@ async function saveTransaction(ev) {
         document.querySelector(`#transaction-${id}`).remove()
         renderTransaction(transaction)
     } else {
-        const response = await fetch('https://financas-db.vercel.app/transactions', {
-            method: 'POST',
-            body: JSON.stringify({ name, amount }),
-            headers: {
-                'Content-Type': 'application/json'
+        try {
+            const response = await fetch('https://financas-db.vercel.app/transactions', {
+                method: 'POST',
+                body: JSON.stringify({ name, amount }),
+                headers: {
+                    'Content-Type': 'application/json'
             }
-        })
-        const transaction = await response.json()
-        transactions.push(transaction)
-        renderTransaction(transaction)
+            })
+            const transaction = await response.json()
+            transactions.push(transaction)
+            renderTransaction(transaction)
+        } catch (error) {
+            console.log(error)
+            const transaction = await response.json()
+            transactions.push(transaction)
+            renderTransaction(transaction)
+        }
     }
-
     ev.target.reset()
     updateBalance()
 }
