@@ -1,0 +1,10 @@
+npm init -y
+
+npm install json-server
+
+"scripts": {
+    "serve": "json-server --watch db.json"
+  },
+
+
+npm run serve
